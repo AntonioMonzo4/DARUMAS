@@ -3,8 +3,17 @@ import type { Goal, Subtask } from '../types'
 import { fileLoad, fileSave, isTauri } from '../lib/storage'
 
 const STORAGE_KEY = 'daruma-goals-v1'
+const REMOVED_KEY = 'daruma-seeds-removed'
 
-function seedGoals(): Goal[] {
+function dateStr(offsetDays: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() + offsetDays)
+  const m = `${d.getMonth() + 1}`.padStart(2, '0')
+  const day = `${d.getDate()}`.padStart(2, '0')
+  return `${d.getFullYear()}-${m}-${day}`
+}
+
+function examples(): Goal[] {
   const day = 86_400_000
   const now = Date.now()
   return [
@@ -14,7 +23,7 @@ function seedGoals(): Goal[] {
       note: 'Practicar 20 minutos cada mañana.',
       kanji: '続',
       color: 'shu',
-      dueDate: new Date(now + day * 21).toISOString().slice(0, 10),
+      dueDate: dateStr(21),
       createdAt: now - day * 5,
       status: 'active',
       subtasks: [
@@ -27,7 +36,7 @@ function seedGoals(): Goal[] {
       title: 'Correr 10 km sin parar',
       kanji: '健',
       color: 'matsu',
-      dueDate: new Date(now + day * 45).toISOString().slice(0, 10),
+      dueDate: dateStr(45),
       createdAt: now - day * 12,
       status: 'active',
     },
@@ -38,10 +47,114 @@ function seedGoals(): Goal[] {
       kanji: '夢',
       color: 'kin',
       createdAt: now - day * 40,
-      completedAt: now - day * 3,
+      completedAt: now - day,
+      status: 'completed',
+    },
+    {
+      id: 'seed-4',
+      title: 'Leer 12 libros este año',
+      note: 'Uno por mes, sin excusas.',
+      kanji: '書',
+      color: 'murasaki',
+      dueDate: dateStr(60),
+      createdAt: now - day * 8,
+      status: 'active',
+      subtasks: [
+        { id: 'st-4', text: 'Elegir la lista de lectura', done: true },
+        { id: 'st-5', text: 'Libro de febrero', done: false },
+        { id: 'st-6', text: 'Libro de marzo', done: false },
+      ],
+    },
+    {
+      id: 'seed-5',
+      title: 'Enviar el portafolio a 5 clientes',
+      kanji: '集',
+      color: 'ai',
+      dueDate: dateStr(7),
+      createdAt: now - day * 3,
+      status: 'active',
+    },
+    {
+      id: 'seed-6',
+      title: 'Meditar 10 minutos cada mañana',
+      kanji: '静',
+      color: 'kaki',
+      dueDate: dateStr(3),
+      createdAt: now - day * 2,
+      status: 'active',
+    },
+    {
+      id: 'seed-7',
+      title: 'Renovar el permiso de conducir',
+      note: 'Cita en el ITV, lleva el DNI.',
+      kanji: '車',
+      color: 'shu',
+      dueDate: dateStr(-2),
+      createdAt: now - day * 15,
+      status: 'active',
+    },
+    {
+      id: 'seed-8',
+      title: 'Preparar la presentación del lunes',
+      kanji: '前',
+      color: 'ai',
+      dueDate: dateStr(0),
+      createdAt: now - day,
+      status: 'active',
+      subtasks: [
+        { id: 'st-8', text: 'Terminar las diapositivas', done: false },
+        { id: 'st-9', text: 'Ensayar 2 veces', done: false },
+      ],
+    },
+    {
+      id: 'seed-9',
+      title: 'Dejar el azúcar 30 días',
+      kanji: '断',
+      color: 'matsu',
+      dueDate: dateStr(14),
+      createdAt: now - day * 6,
+      status: 'active',
+    },
+    {
+      id: 'seed-10',
+      title: 'Terminar el rompecabezas de 1000 piezas',
+      kanji: '完',
+      color: 'kin',
+      createdAt: now - day * 9,
+      completedAt: now,
       status: 'completed',
     },
   ]
+}
+
+// Fill missing demo goals (once the list only contains seeds), skipping any
+// the user deleted on purpose. Idempotent, so it works for both the
+// localStorage copy and the desktop file.
+function maybeUpgrade(list: Goal[]): Goal[] {
+  if (!list.length || !list.every((g) => g.id.startsWith('seed-'))) return list
+  let gone = new Set<string>()
+  try {
+    gone = new Set(JSON.parse(localStorage.getItem(REMOVED_KEY) ?? '[]'))
+  } catch {
+    /* ignore */
+  }
+  const byId = new Map(list.map((g) => [g.id, g]))
+  const merged = examples()
+    .filter((f) => !gone.has(f.id))
+    .map((f) => byId.get(f.id) ?? f)
+  return merged.length === list.length ? list : merged
+}
+
+function recordRemovedSeed(id: string) {
+  try {
+    const arr: string[] = JSON.parse(localStorage.getItem(REMOVED_KEY) ?? '[]')
+    if (!arr.includes(id)) {
+      arr.push(id)
+      localStorage.setItem(REMOVED_KEY, JSON.stringify(arr))
+    }
+  } catch {
+    /* ignore */
+  }
 }
 
 function sanitize(list: unknown): Goal[] | null {
@@ -60,10 +173,12 @@ function sanitize(list: unknown): Goal[] | null {
 function loadSync(): Goal[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return seedGoals()
-    return sanitize(JSON.parse(raw)) ?? seedGoals()
+    if (!raw) return examples()
+    const parsed = sanitize(JSON.parse(raw))
+    if (!parsed) return examples()
+    return maybeUpgrade(parsed)
   } catch {
-    return seedGoals()
+    return examples()
   }
 }
 
@@ -83,8 +198,10 @@ export function useGoals() {
         try {
           const parsed = sanitize(JSON.parse(raw))
           if (parsed) {
-            setGoals(parsed)
+            const upgraded = maybeUpgrade(parsed)
+            setGoals(upgraded)
             hydrated.current = true
+            if (upgraded !== parsed) void fileSave(JSON.stringify(upgraded))
             return
           }
         } catch {
@@ -149,16 +266,18 @@ export function useGoals() {
 
   const removeGoal = useCallback((id: string) => {
     setGoals((prev) => prev.filter((g) => g.id !== id))
+    if (id.startsWith('seed-')) recordRemovedSeed(id)
   }, [])
 
   const reorderGoals = useCallback((fromId: string, toId: string) => {
     setGoals((prev) => {
       const from = prev.findIndex((g) => g.id === fromId)
-      if (from < 0) return prev
+      const to = prev.findIndex((g) => g.id === toId)
+      if (from < 0 || to < 0 || from === to) return prev
       const list = [...prev]
       const [moved] = list.splice(from, 1)
-      const to = list.findIndex((g) => g.id === toId)
-      list.splice(to < 0 ? list.length : to, 0, moved)
+      // land on the target's slot: after it when dragging down, before it when dragging up
+      list.splice(to, 0, moved)
       return list
     })
   }, [])
@@ -192,35 +311,21 @@ export function useGoals() {
     )
   }, [])
 
-  const replaceAll = useCallback((list: Goal[]) => {
-    setGoals(list)
-  }, [])
-
-  const exportData = useCallback(() => {
-    const payload = { app: 'daruma', version: 1, exportedAt: new Date().toISOString(), goals }
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `daruma-backup-${new Date().toISOString().slice(0, 10)}.json`
-    document.body.appendChild(a)
-    a.click()
-    a.remove()
-    setTimeout(() => URL.revokeObjectURL(url), 4000)
-  }, [goals])
-
-  const importData = useCallback((raw: string): { ok: boolean; count?: number; error?: string } => {
-    try {
-      const parsed = JSON.parse(raw)
-      const list = Array.isArray(parsed) ? parsed : (parsed as { goals?: unknown }).goals
-      const clean = sanitize(list)
-      if (!clean) return { ok: false, error: 'El archivo no contiene metas válidas.' }
-      setGoals(clean)
-      return { ok: true, count: clean.length }
-    } catch {
-      return { ok: false, error: 'No se pudo leer el archivo JSON.' }
+  const loadExamples = useCallback(() => {
+    const missing = examples().filter((f) => !goals.some((g) => g.id === f.id))
+    if (missing.length) {
+      setGoals((prev) => [...missing, ...prev])
+      try {
+        const gone: string[] = JSON.parse(localStorage.getItem(REMOVED_KEY) ?? '[]')
+        const restored = new Set(missing.map((m) => m.id))
+        const kept = gone.filter((id) => !restored.has(id))
+        localStorage.setItem(REMOVED_KEY, JSON.stringify(kept))
+      } catch {
+        /* ignore */
+      }
     }
-  }, [])
+    return missing.length
+  }, [goals])
 
   return {
     goals,
@@ -233,8 +338,6 @@ export function useGoals() {
     addSubtask,
     toggleSubtask,
     removeSubtask,
-    replaceAll,
-    exportData,
-    importData,
+    loadExamples,
   }
 }

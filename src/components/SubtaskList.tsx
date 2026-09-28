@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Goal, Subtask } from '../types'
+import { playTick } from '../lib/sfx'
 
 interface SubtaskListProps {
   goal: Goal
@@ -55,7 +56,10 @@ export function SubtaskList({ goal, onAdd, onToggle, onRemove }: SubtaskListProp
                 type="button"
                 className="subtask-check"
                 aria-pressed={s.done}
-                onClick={() => onToggle(goal.id, s.id)}
+                onClick={() => {
+                  playTick()
+                  onToggle(goal.id, s.id)
+                }}
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path

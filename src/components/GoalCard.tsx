@@ -42,6 +42,7 @@ export function GoalCard({
   const [confirming, setConfirming] = useState(false)
   const [justCompleted, setJustCompleted] = useState(false)
   const [sharing, setSharing] = useState(false)
+  const [shared, setShared] = useState(false)
   const [dragOver, setDragOver] = useState(false)
   const completed = goal.status === 'completed'
   const left = daysLeft(goal.dueDate)
@@ -64,6 +65,8 @@ export function GoalCard({
     setSharing(true)
     try {
       await shareDaruma(goal)
+      setShared(true)
+      window.setTimeout(() => setShared(false), 2400)
     } catch {
       /* export failed */
     } finally {
@@ -243,7 +246,7 @@ export function GoalCard({
                 strokeLinejoin="round"
               />
             </svg>
-            Compartir
+            {shared ? 'Guardado ✓' : 'Compartir'}
           </button>
 
           {confirming ? (

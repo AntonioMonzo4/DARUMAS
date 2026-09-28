@@ -10,7 +10,7 @@ import { Confetti } from './components/Confetti'
 import { TraditionSection } from './components/TraditionSection'
 import { makeConfettiBurst, type Piece } from './lib/confetti'
 import { isTauri } from './lib/storage'
-import { setSoundEnabled, soundEnabled } from './lib/sfx'
+import { playTaiko, playTick, setSoundEnabled, soundEnabled } from './lib/sfx'
 import Daruma from './components/Daruma'
 import type { Goal } from './types'
 
@@ -42,22 +42,6 @@ function computeStreak(goals: Goal[]): number {
   return streak
 }
 
-function monthlyBuckets(goals: Goal[]) {
-  const now = new Date()
-  const buckets = Array.from({ length: 6 }, (_, i) => {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
-    return { key: `${d.getFullYear()}-${d.getMonth()}`, label: d.toLocaleDateString('es-ES', { month: 'short' }), count: 0 }
-  })
-  const idx = new Map(buckets.map((b, i) => [b.key, i]))
-  for (const g of goals) {
-    if (g.status !== 'completed' || !g.completedAt) continue
-    const d = new Date(g.completedAt)
-    const i = idx.get(`${d.getFullYear()}-${d.getMonth()}`)
-    if (i !== undefined) buckets[i].count++
-  }
-  return buckets.reverse()
-}
-
 export default function App() {
   const {
     goals,
@@ -70,8 +54,7 @@ export default function App() {
     addSubtask,
     toggleSubtask,
     removeSubtask,
-    exportData,
-    importData,
+    loadExamples,
   } = useGoals()
   useDueNotifications(goals)
 
@@ -83,30 +66,23 @@ export default function App() {
   const confettiTimer = useRef<number | undefined>(undefined)
   const toastTimer = useRef<number | undefined>(undefined)
   const dragId = useRef<string | null>(null)
-  const fileInput = useRef<HTMLInputElement | null>(null)
 
   const stats = useMemo(() => {
     const total = goals.length
     const completed = goals.filter((g) => g.status === 'completed').length
     const streak = computeStreak(goals)
-    const months = monthlyBuckets(goals)
     return {
       total,
       completed,
       active: total - completed,
       pct: total ? completed / total : 0,
       streak,
-      months,
-      maxMonth: Math.max(1, ...months.map((m) => m.count)),
     }
   }, [goals])
 
   const visible = useMemo(() => {
-    const list =
-      filter === 'all'
-        ? goals
-        : goals.filter((g) => g.status === (filter === 'completed' ? 'completed' : 'active'))
-    return [...list].sort((a, b) => b.createdAt - a.createdAt)
+    if (filter === 'all') return goals
+    return goals.filter((g) => g.status === (filter === 'completed' ? 'completed' : 'active'))
   }, [goals, filter])
 
   const showToast = (msg: string) => {
@@ -120,25 +96,19 @@ export default function App() {
     setPieces(makeConfettiBurst())
     window.clearTimeout(confettiTimer.current)
     confettiTimer.current = window.setTimeout(() => setPieces([]), 2800)
+    window.setTimeout(playTaiko, 180)
   }
 
   const handleToggleSound = () => {
     const next = !sound
     setSound(next)
     setSoundEnabled(next)
+    if (next) playTick()
   }
 
-  const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    e.target.value = ''
-    if (!file) return
-    const reader = new FileReader()
-    reader.onload = () => {
-      const res = importData(String(reader.result ?? ''))
-      if (res.ok) showToast(`Importadas ${res.count} metas ✓`)
-      else showToast(res.error ?? 'Error al importar')
-    }
-    reader.readAsText(file)
+  const handleLoadExamples = () => {
+    const n = loadExamples()
+    showToast(n ? `${n} ejemplos añadidos ✓` : 'Los 10 ejemplos ya están cargados')
   }
 
   const handleDragStart = (id: string) => {
@@ -218,7 +188,27 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          {sound ? '🔊' : '🔇'}
+          {sound ? (
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+              <path
+                d="M16.5 8.5a5 5 0 010 7M18.8 6.2a8.2 8.2 0 010 11.6"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+            </svg>
+          ) : (
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+              <path
+                d="M17 9.5l4 5M21 9.5l-4 5"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
         </motion.button>
       </header>
 
@@ -249,60 +239,18 @@ export default function App() {
           </div>
         </div>
 
-        <div className="stat-chart-wrap">
-          <div className="stat-bar-label">
-            <span>Cumplimientos · últimos 6 meses</span>
-          </div>
-          <div className="month-bars" role="img" aria-label="Gráfico de metas cumplidas por mes">
-            {stats.months.map((m) => (
-              <div className="month-col" key={m.key}>
-                <span className="month-count">{m.count}</span>
-                <div className="month-bar">
-                  <motion.div
-                    className="month-fill"
-                    initial={{ height: 0 }}
-                    animate={{ height: `${(m.count / stats.maxMonth) * 100}%` }}
-                    transition={{ type: 'spring', stiffness: 110, damping: 20 }}
-                  />
-                </div>
-                <span className="month-label">{m.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="data-actions">
-          <button className="btn btn-ghost btn-mini" onClick={exportData}>
+          <button className="btn btn-ghost btn-mini" onClick={handleLoadExamples}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
-                d="M12 3v12m0 0l-4-4m4 4l4-4M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4"
+                d="M12 5v14M5 12h14"
                 stroke="currentColor"
                 strokeWidth="1.8"
                 strokeLinecap="round"
-                strokeLinejoin="round"
               />
             </svg>
-            Exportar JSON
+            Cargar 10 ejemplos
           </button>
-          <button className="btn btn-ghost btn-mini" onClick={() => fileInput.current?.click()}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M12 21V9m0 0l-4 4m4-4l4 4M5 9V5a2 2 0 012-2h10a2 2 0 012 2v4"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Importar JSON
-          </button>
-          <input
-            ref={fileInput}
-            type="file"
-            accept="application/json,.json"
-            hidden
-            onChange={handleImportFile}
-          />
         </div>
       </section>
 
