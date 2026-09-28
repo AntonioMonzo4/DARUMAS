@@ -1,0 +1,23 @@
+
+> daruma@0.0.0 tauri:dev
+> tauri dev
+
+     Running BeforeDevCommand (`npm run dev`)
+
+> daruma@0.0.0 dev
+> vite
+
+
+  [32m[1mVITE[22m v8.3.1[39m  [2mready in [0m[1m275[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+        Info Watching C:\Users\amona\Desktop\DARUMA\src-tauri for changes...
+[1m[93mwarning[0m[1m[97m: linker stdout: Creando biblioteca C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.lib y objeto C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.exp[0m
+  [1m[96m|[0m
+  [1m[96m= [0m[1m[97mnote[0m: `#[warn(linker_messages)]` on by default
+
+[1m[93mwarning[0m: `daruma` (lib) generated 1 warning
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 0.60s
+[1m[92m     Running[0m `target\debug\daruma.exe`
