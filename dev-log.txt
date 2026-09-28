@@ -21,3 +21,238 @@
 [1m[93mwarning[0m: `daruma` (lib) generated 1 warning
 [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 0.60s
 [1m[92m     Running[0m `target\debug\daruma.exe`
+[2m15:07:08[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:07:53[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m15:07:55[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m15:07:57[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m15:08:16[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:08:19[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:08:25[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:08:26[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:08:29[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/GoalCard.tsx[22m
+[2m15:08:31[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/GoalCard.tsx[22m
+[2m15:08:45[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/GoalCard.tsx[22m
+[2m15:08:54[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/SubtaskList.tsx[22m
+[2m15:08:55[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/SubtaskList.tsx[22m
+        Info File src-tauri\src\lib.rs changed. Rebuilding application...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+[1m[92m   Compiling[0m daruma v0.0.0 (C:\Users\amona\Desktop\DARUMA\src-tauri)
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m[1m[97m: unused import: `std::os::windows::ffi::OsStrExt`[0m
+  [1m[96m--> [0msrc\lib.rs:52:9
+   [1m[96m|[0m
+[1m[96m52[0m [1m[96m|[0m     use std::os::windows::ffi::OsStrExt;
+   [1m[96m|[0m         [1m[93m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+   [1m[96m|[0m
+   [1m[96m= [0m[1m[97mnote[0m: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m[1m[97m: function `register_aumid` is never used[0m
+  [1m[96m--> [0msrc\lib.rs:51:4
+   [1m[96m|[0m
+[1m[96m51[0m [1m[96m|[0m fn register_aumid(id: &str, display: &str) {
+   [1m[96m|[0m    [1m[93m^^^^^^^^^^^^^^[0m
+   [1m[96m|[0m
+   [1m[96m= [0m[1m[97mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+[1m[93mwarning[0m[1m[97m: function `SetCurrentProcessExplicitAppUserModelID` is never used[0m
+  [1m[96m--> [0msrc\lib.rs:44:8
+   [1m[96m|[0m
+[1m[96m44[0m [1m[96m|[0m     fn SetCurrentProcessExplicitAppUserModelID(app_id: *const u16) -> i32;
+   [1m[96m|[0m        [1m[93m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m[1m[97m: linker stdout: Creando biblioteca C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.lib y objeto C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.exp[0m
+  [1m[96m|[0m
+  [1m[96m= [0m[1m[97mnote[0m: `#[warn(linker_messages)]` on by default
+
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m: `daruma` (lib) generated 4 warnings (run `cargo fix --lib -p daruma` to apply 1 suggestion)
+[1m[96m    Building[0m [=======================> ] 371/372: daruma(…                                                            [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 11.34s
+[1m[92m     Running[0m `target\debug\daruma.exe`
+        Info File src-tauri\src\lib.rs changed. Rebuilding application...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+[1m[92m   Compiling[0m daruma v0.0.0 (C:\Users\amona\Desktop\DARUMA\src-tauri)
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m[1m[97m: function `register_aumid` is never used[0m
+  [1m[96m--> [0msrc\lib.rs:51:4
+   [1m[96m|[0m
+[1m[96m51[0m [1m[96m|[0m fn register_aumid(id: &str, display: &str) {
+   [1m[96m|[0m    [1m[93m^^^^^^^^^^^^^^[0m
+   [1m[96m|[0m
+   [1m[96m= [0m[1m[97mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m[1m[97m: function `SetCurrentProcessExplicitAppUserModelID` is never used[0m
+  [1m[96m--> [0msrc\lib.rs:44:8
+   [1m[96m|[0m
+[1m[96m44[0m [1m[96m|[0m     fn SetCurrentProcessExplicitAppUserModelID(app_id: *const u16) -> i32;
+   [1m[96m|[0m        [1m[93m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+
+[1m[96m    Building[0m [=======================> ] 370/372: daruma          Info File src-tauri\src\lib.rs changed. Rebuilding application...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+[1m[92m   Compiling[0m daruma v0.0.0 (C:\Users\amona\Desktop\DARUMA\src-tauri)
+[1m[96m    Building[0m [=======================> ] 370/372: daruma          Info File src-tauri\src\lib.rs changed. Rebuilding application...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+[1m[92m   Compiling[0m daruma v0.0.0 (C:\Users\amona\Desktop\DARUMA\src-tauri)
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m[1m[97m: linker stdout: Creando biblioteca C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.lib y objeto C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.exp[0m
+  [1m[96m|[0m
+  [1m[96m= [0m[1m[97mnote[0m: `#[warn(linker_messages)]` on by default
+
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m: `daruma` (lib) generated 1 warning
+[1m[96m    Building[0m [=======================> ] 371/372: daruma(…                                                            [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 14.37s
+[1m[92m     Running[0m `target\debug\daruma.exe`
+[2m15:13:23[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc-tauri/target/release/build/daruma-a36a65fb6191d69d/out/tauri-codegen-assets/45ee4ed4d07a2cf823dea0767266fd1e3cc7d6551adb9101d981949f390e3ba7.html[22m
+[2m15:17:24[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m15:17:31[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m15:18:16[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc-tauri/target/release/build/daruma-a36a65fb6191d69d/out/tauri-codegen-assets/6e3fe28fa66da617adb2310ab5e1e2d85e9702dd507da3625604e135952e783c.html[22m
+[2m15:34:30[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:34:37[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:34:48[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:34:50[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:34:59[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:16[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:20[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:20[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mReact has detected a change in the order of Hooks called by App. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useState                   useState
+2. useRef                     useRef
+3. useRef                     useRef
+4. useEffect                  useEffect
+5. useEffect                  useEffect
+6. useCallback                useCallback
+7. useCallback                useCallback
+8. useCallback                useCallback
+9. useCallback                useCallback
+10. useCallback               useCallback
+11. useCallback               useCallback
+12. useCallback               useCallback
+13. useCallback               useCallback
+14. useCallback               useCallback
+15. useCallback               useCallback
+16. useCallback               useState
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[2m15:35:20[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Should have a queue. You are likely calling Hooks conditionally, which is not allowed. (https://react.dev/link/invalid-hook-call)
+[39m > updateReducerImpl node_modules/react-dom/cjs/react-dom-client.development.js:8355:14
+ > updateReducer node_modules/react-dom/cjs/react-dom-client.development.js:8350:13
+ > Object.useState node_modules/react-dom/cjs/react-dom-client.development.js:29181:17
+ > exports.useState node_modules/react/cjs/react.development.js:1309:33
+ > useDueNotifications src/hooks/useNotifications.ts:11:48
+    9  |  
+    10 |  export function useDueNotifications(goals: Goal[]) {
+    11 |    const [permissionAsked, setPermissionAsked] = useState(false)
+       |                                                  ^
+    12 |  
+    13 |    useEffect(() => {
+ > App src/App.tsx:76:2
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+
+[2m15:35:20[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <App> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m15:35:25[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:28[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:38[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: monthlyBuckets is not defined
+[39m > src/App.tsx:75:19
+    73 |      const completed = goals.filter((g) => g.status === 'completed').length
+    74 |      const streak = computeStreak(goals)
+    75 |      const months = monthlyBuckets(goals)
+       |                     ^
+    76 |      return {
+    77 |        total,
+ > updateMemo node_modules/react-dom/cjs/react-dom-client.development.js:9179:18
+ > Object.useMemo node_modules/react-dom/cjs/react-dom-client.development.js:29154:17
+ > exports.useMemo node_modules/react/cjs/react.development.js:1297:33
+ > App src/App.tsx:71:16
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+
+[2m15:35:38[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <App> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m15:35:41[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:41[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of undefined (reading 'map')
+[39m > App src/App.tsx:256:26
+    254 |            </div>
+    255 |            <div className="month-bars" role="img" aria-label="Gráfico de metas cumplidas por mes">
+    256 |              {stats.months.map((m) => (
+        |                            ^
+    257 |                <div className="month-col" key={m.key}>
+    258 |                  <span className="month-count">{m.count}</span>
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+[2m15:35:41[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <App> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m15:35:48[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:48[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of undefined (reading 'map')
+[39m > App src/App.tsx:255:26
+    253 |            </div>
+    254 |            <div className="month-bars" role="img" aria-label="Gráfico de metas cumplidas por mes">
+    255 |              {stats.months.map((m) => (
+        |                            ^
+    256 |                <div className="month-col" key={m.key}>
+    257 |                  <span className="month-count">{m.count}</span>
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+[2m15:35:48[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <App> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m15:35:49[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:35:50[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of undefined (reading 'map')
+[39m > App src/App.tsx:247:26
+    245 |            </div>
+    246 |            <div className="month-bars" role="img" aria-label="Gráfico de metas cumplidas por mes">
+    247 |              {stats.months.map((m) => (
+        |                            ^
+    248 |                <div className="month-col" key={m.key}>
+    249 |                  <span className="month-count">{m.count}</span>
+ > Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+[2m15:35:50[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mAn error occurred in the <App> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+[2m15:36:18[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:37:33[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:37:37[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:37:50[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:37:52[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[2m15:40:20[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc-tauri/target/release/build/daruma-a36a65fb6191d69d/out/tauri-codegen-assets/eda4512b1593f7614906f180dc89716e073781dc4f2ce5eb99369786d653866c.html[22m

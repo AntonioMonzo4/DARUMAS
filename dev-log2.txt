@@ -1,0 +1,28 @@
+
+> daruma@0.0.0 tauri:dev
+> tauri dev
+
+     Running BeforeDevCommand (`npm run dev`)
+
+> daruma@0.0.0 dev
+> vite
+
+[2m16:10:39[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
+
+  [32m[1mVITE[22m v8.3.1[39m  [2mready in [0m[1m272[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m16:10:40[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [optimizer] scanning dependencies...
+[2m16:10:41[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [optimizer] bundling dependencies...
+     Running DevCommand (`cargo  run --no-default-features --color always --`)
+        Info Watching C:\Users\amona\Desktop\DARUMA\src-tauri for changes...
+[1m[92m   Compiling[0m daruma v0.0.0 (C:\Users\amona\Desktop\DARUMA\src-tauri)
+[1m[96m    Building[0m [=======================> ] 369/372: daruma(…[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m[1m[97m: linker stdout: Creando biblioteca C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.lib y objeto C:\Users\amona\Desktop\DARUMA\src-tauri\target\debug\deps\daruma_lib.dll.exp[0m
+  [1m[96m|[0m
+  [1m[96m= [0m[1m[97mnote[0m: `#[warn(linker_messages)]` on by default
+
+[1m[96m    Building[0m [=======================> ] 370/372: daruma                                                              [1m[93mwarning[0m: `daruma` (lib) generated 1 warning
+[1m[96m    Building[0m [=======================> ] 371/372: daruma(…                                                            [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 20.74s
+[1m[92m     Running[0m `target\debug\daruma.exe`
+^C
